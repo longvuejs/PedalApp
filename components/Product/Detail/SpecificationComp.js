@@ -5,28 +5,17 @@ import {
   Modal,
   Pressable,
   ScrollView,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import color from '../../../contains/color';
 
-const SpecificationComp = () => {
+const SpecificationComp = props => {
+  const specificationTable = props.dataSpecificationComp;
   const [specTableVisible, setSpecTableVisible] = useState(false);
-  const specificationTable = [
-    ['Type Effect', 'Phaser Effects Pedals'],
-    ['Circuit', 'Analog'],
-    ['Bypass', 'True Bypass'],
-    ['Audio', 'Mono'],
-    [
-      'Power Supply',
-      '9V battery included (optional 9.6VDC-200mA power adapter not included)',
-    ],
-    ['Dimensions (in)', '4.5 x 2.75 x 2.1'],
-    ['Current Draw', '10mA'],
-    ['Year Released', '2006'],
-    ['UPC', '683274050041'],
-  ];
+
   const specificationText = 'Specification :';
 
   const OpenSpecificationButton = (
@@ -39,27 +28,36 @@ const SpecificationComp = () => {
           Alert.alert('Modal has been closed.');
           setSpecTableVisible(!specTableVisible);
         }}>
-        <Pressable
-          style={styles.centerView}
-          onPress={() => setSpecTableVisible(!specTableVisible)}>
-          <Pressable onPress={() => setSpecTableVisible(specTableVisible)}>
-            <View style={styles.modalView}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
-                <Text style={styles.specificationTitle}>oceans 12</Text>
-                <Pressable
-                  onPress={() => setSpecTableVisible(!specTableVisible)}>
-                  <Icon name="close-outline" size={30}></Icon>
-                </Pressable>
-              </View>
-              <Text style={styles.specificationText}>Specification</Text>
-              <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.centerView}>
+          <Pressable
+            onPress={() => setSpecTableVisible(!specTableVisible)}
+            style={StyleSheet.absoluteFill}
+          />
+          <View style={styles.modalView}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingBottom: 5
+              }}>
+              <Text style={styles.specificationTitle}>
+                {specificationTable.name}
+              </Text>
+              <Pressable onPress={() => setSpecTableVisible(!specTableVisible)}>
+                <Icon
+                  name="close-outline"
+                  size={30}
+                  color={color.textBlack}></Icon>
+              </Pressable>
+            </View>
+            <Text style={styles.specificationText}>Specification : </Text>
+            <ScrollView
+              decelerationRate="fast"
+              showsVerticalScrollIndicator={false}>
+              <TouchableWithoutFeedback>
                 <View style={styles.table}>
-                  {specificationTable.map((item, index) => (
+                  {specificationTable.specification.map((item, index) => (
                     <View
                       style={{flexDirection: 'row', width: '100%'}}
                       key={index}>
@@ -68,13 +66,13 @@ const SpecificationComp = () => {
                     </View>
                   ))}
                 </View>
-                <Text style={styles.specificationEndContent}>
-                  * Copyright by 1Pedal *
-                </Text>
-              </ScrollView>
-            </View>
-          </Pressable>
-        </Pressable>
+              </TouchableWithoutFeedback>
+              <Text style={styles.specificationEndContent}>
+                * Copyright by 1Pedal *
+              </Text>
+            </ScrollView>
+          </View>
+        </View>
       </Modal>
       <Pressable onPress={() => setSpecTableVisible(true)}>
         <Text
@@ -93,7 +91,7 @@ const SpecificationComp = () => {
   return (
     <View style={styles.table}>
       <Text style={styles.specificationText}>{specificationText}</Text>
-      {specificationTable.slice(0, 5).map((item, index) => (
+      {specificationTable.specification.slice(0, 5).map((item, index) => (
         <View style={{flexDirection: 'row', width: '100%'}} key={index}>
           <Text style={styles.tableTitle}>{item[0]}</Text>
           <Text style={styles.tableContent}>{item[1]}</Text>

@@ -4,12 +4,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import color from '../../../contains/color';
 
-const VoteComp = () => {
-  const title = 'OCEANS 12';
+const VoteComp = props => {
   const ratingNumber = '5.0';
   const ratingReview = '(1120 Reviews)';
   const [love, setLove] = useState(false);
   const handleLove = () => {
+    const arrGetLove = {...props};
+    arrGetLove.isLove = love;
+    console.log(arrGetLove);
     setLove(!love);
   };
   return (
@@ -20,7 +22,7 @@ const VoteComp = () => {
         alignItems: 'center',
       }}>
       <View>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{props.dataVoteComp.name}</Text>
         <View style={styles.rating}>
           <Icon color={color.textYellow} name="star" size={25} />
           <Text style={styles.ratingNumber}>{ratingNumber}</Text>

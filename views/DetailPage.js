@@ -7,17 +7,32 @@ import DescriptionComp from '../components/Product/Detail/DescriptionComp';
 import SpecificationComp from '../components/Product/Detail/SpecificationComp';
 import LinkComp from '../components/Product/Detail/LinkComp';
 
-const DetailPage = () => {
+{/* <Detaipage index={index} */}
+
+const DetailPage = (props) => {
+  const getDataVoteComp = {
+    name: props.route.params.ListPedalTmp.title,
+    image: props.route.params.ListPedalTmp.image[0],
+  }
+  const getDataDescriptionComp ={
+    name: props.route.params.ListPedalTmp.title,
+    description: props.route.params.ListPedalTmp.description
+  }
+  const getDataSpecificationComp = {
+    name: props.route.params.ListPedalTmp.title,
+    specification: props.route.params.ListPedalTmp.specification
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
-          <CarouselComp />
+          <CarouselComp images={props.route.params.ListPedalTmp.image} />
         </View>
         <View style={styles.detailProduct}>
-          <VoteComp />
-          <DescriptionComp />
-          <SpecificationComp />
+          <VoteComp dataVoteComp={getDataVoteComp} />
+          <DescriptionComp dataDescriptionComp={getDataDescriptionComp} />
+          <SpecificationComp dataSpecificationComp={getDataSpecificationComp} />
           <LinkComp />
         </View>
       </ScrollView>
