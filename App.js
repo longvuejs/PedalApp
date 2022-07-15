@@ -12,6 +12,7 @@ import CustomDrawer from './components/Drawer/CustomDrawer';
 import HomePage from './views/HomePage';
 import ProductPage from './views/ProductPage';
 import DetailPage from './views/DetailPage';
+import FavoritePage from './views/FavoritePage';
 import TestPage from './views/TestPage';
 import CarouselView from './components/Product/Detail/CarouselView';
 import { enableFreeze } from 'react-native-screens';
@@ -29,7 +30,7 @@ const DrawerContainer = () => {
         headerShown: true,
         drawerLabelStyle: {marginLeft: -20},
       }}
-      initialRouteName="Home"
+      initialRouteName="Test"
       drawerContent={props => <CustomDrawer {...props} />}>
       <Drawer.Group
         screenOptions={{
@@ -50,6 +51,15 @@ const DrawerContainer = () => {
           options={{
             drawerIcon: ({color}) => (
               <Icon name="cart-outline" size={22} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Favorite"
+          component={FavoritePage}
+          options={{
+            drawerIcon: ({color}) => (
+              <Icon name="heart-outline" size={22} color={color} />
             ),
           }}
         />

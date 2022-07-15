@@ -11,9 +11,10 @@ const VoteComp = props => {
   const handleLove = () => {
     const arrGetLove = {...props};
     arrGetLove.isLove = love;
-    console.log(arrGetLove);
+    console.log(arrGetLove.isLove);
     setLove(!love);
   };
+ 
   return (
     <View
       style={{

@@ -90,10 +90,11 @@ const Product = () => {
           img: 'https://res.cloudinary.com/dnzo47nze/image/upload/v1657682841/App%20Pedal/Product%20Image/MEMORY_BOY_3_pmfdrx.png',
         },
       ],
-      description: `The EHX Memory Boy straps on the cape and flies with heritage into the search for amazing sound at a price that mere mortals can afford.
-      The Memory Boy uses the Deluxe Memory Man as a base, expanding upon it with additional modulation features and an optional Expression Pedal input allowing external control over Delay Time or Modulation Rate.
-      The Memory Boy carries the performance heritage for warm analog delays and modulations that made its ancestors the go to legends that remain today. With two years in design, the focus was making the legend affordable to every musician while maintaining the character and artistic sounds that let you stand apart.
-      All analog delay with Feedback
+      description: `
+The EHX Memory Boy straps on the cape and flies with heritage into the search for amazing sound at a price that mere mortals can afford.
+The Memory Boy uses the Deluxe Memory Man as a base, expanding upon it with additional modulation features and an optional Expression Pedal input allowing external control over Delay Time or Modulation Rate.
+The Memory Boy carries the performance heritage for warm analog delays and modulations that made its ancestors the go to legends that remain today. With two years in design, the focus was making the legend affordable to every musician while maintaining the character and artistic sounds that let you stand apart.
+All analog delay with Feedback
       Up to 550 ms delay time
       Selectable Chorus or Vibrato modulations rates
       Choose between triangle or square modulation waveforms

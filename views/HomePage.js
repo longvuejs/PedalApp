@@ -1,5 +1,11 @@
 //react library
-import {StyleSheet, View, ImageBackground, Dimensions} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ImageBackground,
+  Dimensions,
+  Button,
+} from 'react-native';
 import React from 'react';
 
 //react navigation
@@ -20,6 +26,7 @@ const windowH = Dimensions.get('window').height;
 const HomePage = () => {
   return (
     <View style={styles.container}>
+
       <ImageBackground
         source={backgroundImage}
         resizeMode="cover"

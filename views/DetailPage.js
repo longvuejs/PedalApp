@@ -1,13 +1,15 @@
 import {StyleSheet, View, SafeAreaView, ScrollView} from 'react-native';
 import React from 'react';
 
+
+
 import CarouselComp from '../components/Product/Detail/CarouselComp';
 import VoteComp from '../components/Product/Detail/VoteComp';
 import DescriptionComp from '../components/Product/Detail/DescriptionComp';
 import SpecificationComp from '../components/Product/Detail/SpecificationComp';
 import LinkComp from '../components/Product/Detail/LinkComp';
 
-{/* <Detaipage index={index} */}
+
 
 const DetailPage = (props) => {
   const getDataVoteComp = {
