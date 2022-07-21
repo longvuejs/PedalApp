@@ -25,7 +25,6 @@ import ButtonComp from '../components/Home/ButtonComp';
 
 //Dimensions
 const windowH = Dimensions.get('window').height;
-
 const HomePage = () => {
   const data2 = useSelector(productSelector)
   data2.ListPedal.map(item => {

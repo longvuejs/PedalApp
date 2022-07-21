@@ -1,14 +1,25 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-
-import color from '../../../contains/color'
+import {productSelector} from '../../../redux/reducers/selectors';
+import {useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
+import color from '../../../contains/color';
 
 const TitleProduct = () => {
+  const navigation = useNavigation();
+  const dataState = useSelector(productSelector);
+  const dataListPedal = dataState.ListPedal;
   return (
     <View style={styles.title}>
       <Text style={styles.newText}>New Pedal</Text>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('SearchPage', {
+            namePage: 'Product',
+            data: dataListPedal,
+          })
+        }>
         <Text style={styles.seeAll}>See all</Text>
       </TouchableOpacity>
     </View>

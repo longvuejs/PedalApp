@@ -16,6 +16,7 @@ import HomePage from './views/HomePage';
 import ProductPage from './views/ProductPage';
 import DetailPage from './views/DetailPage';
 import FavoritePage from './views/FavoritePage';
+import SearchPage from './views/SearchPage';
 import TestPage from './views/TestPage';
 import CarouselView from './components/Product/Detail/CarouselView';
 import {enableFreeze} from 'react-native-screens';
@@ -31,9 +32,8 @@ const DrawerContainer = () => {
     <Drawer.Navigator
       screenOptions={{
         headerShown: true,
-        drawerLabelStyle: {marginLeft: -20},
       }}
-      initialRouteName="Test"
+      initialRouteName="Home"
       drawerContent={props => <CustomDrawer {...props} />}>
       <Drawer.Group
         screenOptions={{
@@ -77,28 +77,33 @@ export default function App() {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Provider store={store}>
-        {/* <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}> */}
-          <NavigationContainer>
-            <Stack.Navigator>
-              <Stack.Screen
-                options={{
-                  headerShown: false,
-                }}
-                name="drawer"
-                component={DrawerContainer}
-              />
-              <Stack.Screen name="Details" component={DetailPage} />
-              <Stack.Screen name="Test" component={TestPage} />
-              <Stack.Screen
-                options={{
-                  headerShown: false,
-                }}
-                name="CarouselView"
-                component={CarouselView}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-        {/* </PersistGate> */}
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              options={{
+                headerShown: false,
+              }}
+              name="drawer"
+              component={DrawerContainer}
+            />
+            <Stack.Screen name="Details" component={DetailPage} />
+            <Stack.Screen name="Test" component={TestPage} />
+            <Stack.Screen
+              options={{
+                headerShown: false,
+              }}
+              name="CarouselView"
+              component={CarouselView}
+            />
+            <Stack.Screen
+              options={{
+                headerShown: false,
+              }}
+              name="SearchPage"
+              component={SearchPage}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
     </SafeAreaView>
   );

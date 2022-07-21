@@ -1,65 +1,53 @@
 import {
-  Image,
-  StyleSheet,
-  Text,
   View,
+  Text,
+  StyleSheet,
+  TextInput,
   FlatList,
-  Alert,
   Pressable,
+  Image,
 } from 'react-native';
 import React, {useState} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useDispatch, useSelector} from 'react-redux';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
 import {productSelector} from '../../redux/reducers/selectors';
 import {useNavigation} from '@react-navigation/native';
 import color from '../../contains/color';
-
-import Icon from 'react-native-vector-icons/Ionicons';
-import {updateLove} from '../../redux/actions/updateActions';
-
-const FavoritesList = () => {
-  const dispatch = useDispatch();
+const SearchComp = props => {
+  //   props.data.data.map(item => {
+  //     console.log(item.id, item.title);
+  //   });
+//   console.log(props.data.data);
+//   console.log(props.data.namePage);
+// //   console.log(props);
   const navigation = useNavigation();
   const dataState = useSelector(productSelector);
   const dataListPedal = dataState.ListPedal;
   const ListLove = dataListPedal.filter(item => item.isLove === true);
-  const handleLove = (id, isLove) => () => {
-    Alert.alert(
-      'Remove from favorite',
-      'The selected favorite info will be deleted from list. Are you sure you want to delete ?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () => {
-            dispatch(
-              updateLove({
-                id: id,
-                isLove: !isLove,
-              }),
-            );
-            const newArr = [...dataListPedal];
-            const ListLoveStorage = newArr.map(item => {
-              return {
-                id: item.id,
-                isLove: id === item.id ? !item.isLove : item.isLove,
-              };
-            });
-            AsyncStorage.setItem('ListLoveStorage', JSON.stringify(ListLoveStorage));
-          },
-        },
-      ],
-    );
-  };
+  const [data, setData] = useState();
+  React.useEffect(() => {
+    ListLove.map(item => {
+      console.log('data List lOVE', item.id, item.title);
+    });
+    console.log('====================================');
+    console.log(props.data.namePage);
+    console.log('====================================');
+    if (props.data.namePage === 'Favorite') {
+      setData(ListLove);
+    } else {
+      setData(props.data.data);
+    }
+  }, [dataState]);
+  //   data.map(item => {
+  //     console.log('DATA Search',item.id, item.title);
+  // });
+
   const renderItem = ({item, index}) => {
     return (
       <Pressable
         onPress={() =>
           navigation.navigate('Details', {
-            ListPedalTmp: ListLove[index],
+            ListPedalTmp: props.data.data[index],
           })
         }>
         <View style={styles.cardFavorites}>
@@ -78,14 +66,6 @@ const FavoritesList = () => {
               <Text>(1200)</Text>
             </View>
           </View>
-          <View>
-            <Icon
-              onPress={handleLove(item.id, item.isLove)}
-              name="heart-circle"
-              size={40}
-              color="red"
-            />
-          </View>
         </View>
       </Pressable>
     );
@@ -94,20 +74,18 @@ const FavoritesList = () => {
     <View style={styles.container}>
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={ListLove}
+        data={data}
         renderItem={renderItem}
       />
     </View>
   );
 };
 
-export default FavoritesList;
+export default SearchComp;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     marginHorizontal: 15,
-    marginVertical: 15,
   },
   cardFavorites: {
     backgroundColor: color.textWhite,

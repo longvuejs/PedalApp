@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, ScrollView, Dimensions, AsyncStorage} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Dimensions} from 'react-native';
 import React from 'react';
 import OptionTool from '../components/Product/Main/OptionTool';
 import Banner from '../components/Product/Main/Banner';

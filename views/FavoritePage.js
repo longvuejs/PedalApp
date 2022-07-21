@@ -4,33 +4,35 @@ import {
   SafeAreaView,
   ScrollView,
   Dimensions,
+  KeyboardAvoidingView
 } from 'react-native';
 import React from 'react';
 
 import OptionTool from '../components/Favorite/OptionTool';
-import SearchComp from '../components/Favorite/SearchComp';
 import FavoritesList from '../components/Favorite/FavoritesList';
 
 import color from '../contains/color';
 
 const windowH = Dimensions.get('window').height;
 
-
 const FavoritePage = () => {
   return (
+    <KeyboardAvoidingView
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+    style={{flex: 1}}
+    enabled={false}
+  >
     <SafeAreaView style={styles.container}>
       <View style={{flex: 1}}>
-        <View style={styles.OptionTool}>
+        <View style={styles.top}>
           <OptionTool />
-        </View>
-        <View style={styles.Search}>
-          <SearchComp />
         </View>
         <View style={styles.FavoritesList}>
           <FavoritesList />
         </View>
       </View>
     </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -41,14 +43,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f1f2f7',
   },
-  OptionTool: {
-    height: '10%',
-  },
-  Search: {
-    height: '6%',
-    justifyContent: 'center',
+  top: {
+    height: '28%'
   },
   FavoritesList: {
-    height: '84%',
+    height: '70%',
   },
 });

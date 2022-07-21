@@ -29,10 +29,10 @@ const VoteComp = props => {
     setLove(newLove);
 
     const newArr = [...ListPedalData.ListPedal];
-    const t = newArr.map(item => {
+    const ListLoveStorage = newArr.map(item => {
       return {id: item.id, isLove: item.id===props.dataVoteComp.id ? newLove : item.isLove};
     });
-    AsyncStorage.setItem('ListLoveStorage', JSON.stringify(t));
+    AsyncStorage.setItem('ListLoveStorage', JSON.stringify(ListLoveStorage));
   };
 
   return (
