@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import color from '../../../contains/color';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 const listCategory = [
   {

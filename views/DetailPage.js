@@ -13,8 +13,9 @@ import LinkComp from '../components/Product/Detail/LinkComp';
 
 const DetailPage = (props) => {
   const getDataVoteComp = {
+    index: props.route.params.getIndex,
+    id: props.route.params.ListPedalTmp.id,
     name: props.route.params.ListPedalTmp.title,
-    image: props.route.params.ListPedalTmp.image[0],
   }
   const getDataDescriptionComp ={
     name: props.route.params.ListPedalTmp.title,

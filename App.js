@@ -1,6 +1,9 @@
 //react library
-import {StyleSheet, SafeAreaView} from 'react-native';
+import {StyleSheet, SafeAreaView, Text} from 'react-native';
 import React from 'react';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import {store, persistor} from './redux/store';
 
 //react navigation
 import {NavigationContainer} from '@react-navigation/native';
@@ -15,9 +18,9 @@ import DetailPage from './views/DetailPage';
 import FavoritePage from './views/FavoritePage';
 import TestPage from './views/TestPage';
 import CarouselView from './components/Product/Detail/CarouselView';
-import { enableFreeze } from 'react-native-screens';
+import {enableFreeze} from 'react-native-screens';
 
-enableFreeze(true)
+enableFreeze(true);
 
 //Icon
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -73,22 +76,30 @@ export default function App() {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            options={{
-              headerShown: false,
-            }}
-            name="drawer"
-            component={DrawerContainer}
-          />
-          <Stack.Screen name="Details" component={DetailPage} />
-          <Stack.Screen name="Test" component={TestPage} />
-          <Stack.Screen options={{
-              headerShown: false,
-            }} name="CarouselView" component={CarouselView} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+        {/* <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}> */}
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                options={{
+                  headerShown: false,
+                }}
+                name="drawer"
+                component={DrawerContainer}
+              />
+              <Stack.Screen name="Details" component={DetailPage} />
+              <Stack.Screen name="Test" component={TestPage} />
+              <Stack.Screen
+                options={{
+                  headerShown: false,
+                }}
+                name="CarouselView"
+                component={CarouselView}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        {/* </PersistGate> */}
+      </Provider>
     </SafeAreaView>
   );
 }

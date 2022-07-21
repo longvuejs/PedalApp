@@ -1,20 +1,40 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
+import {productSelector} from '../../../redux/reducers/selectors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import color from '../../../contains/color';
-
+import {useDispatch} from 'react-redux';
+import {updateLove} from '../../../redux/actions/updateActions';
 const VoteComp = props => {
+  const ListPedalData = useSelector(productSelector);
+  const dispatch = useDispatch();
   const ratingNumber = '5.0';
   const ratingReview = '(1120 Reviews)';
-  const [love, setLove] = useState(false);
+  const [love, setLove] = useState(
+    ListPedalData.ListPedal.find(item => item.id === props.dataVoteComp.id)
+      ?.isLove,
+  );
+
   const handleLove = () => {
-    const arrGetLove = {...props};
-    arrGetLove.isLove = love;
-    console.log(arrGetLove.isLove);
-    setLove(!love);
+    const newLove = !love;
+    dispatch(
+      updateLove({
+        id: props.dataVoteComp.id,
+        isLove: newLove,
+      }),
+    );
+    setLove(newLove);
+
+    const newArr = [...ListPedalData.ListPedal];
+    const t = newArr.map(item => {
+      return {id: item.id, isLove: item.id===props.dataVoteComp.id ? newLove : item.isLove};
+    });
+    AsyncStorage.setItem('ListLoveStorage', JSON.stringify(t));
   };
- 
+
   return (
     <View
       style={{

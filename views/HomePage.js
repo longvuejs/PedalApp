@@ -7,7 +7,10 @@ import {
   Button,
 } from 'react-native';
 import React from 'react';
-
+import {useDispatch, useSelector} from 'react-redux'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {updateList} from '../redux/actions/updateActions';
+import { productSelector } from "../redux/reducers/selectors";
 //react navigation
 
 //custom color
@@ -24,6 +27,19 @@ import ButtonComp from '../components/Home/ButtonComp';
 const windowH = Dimensions.get('window').height;
 
 const HomePage = () => {
+  const data2 = useSelector(productSelector)
+  data2.ListPedal.map(item => {
+    console.log(item.isLove+" "+item.id);
+  })
+  const dispatch = useDispatch()
+  React.useEffect(() => {
+    const getData = AsyncStorage.getItem('ListLoveStorage').then(arr => {
+      const data = JSON.parse(arr)
+      console.log('Homepage',data);
+      dispatch(updateList(data))
+    })
+  }, [])
+
   return (
     <View style={styles.container}>
 
